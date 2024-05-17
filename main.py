@@ -88,10 +88,7 @@ def delete_unused_data():
     print('Done')       
     # pyautogui.alert('Done delete unused data')
 
-def configSystemPerformance():
-    i
-def maxPeformance(data):
-
+def configSystemPerformance(type, data):
     # Chờ một chút để đảm bảo mọi thứ đã sẵn sàng
     time.sleep(2)
 
@@ -104,63 +101,44 @@ def maxPeformance(data):
     time.sleep(1)
     pyautogui.press('enter')
 
-    if (data["statePerformace"] == _minPeformance):
-        # Chọn "View advanced system settings" (Giả sử nó là mục đầu tiên trong danh sách)
-        time.sleep(1)
-        pyautogui.press('enter')
-        time.sleep(1)
-        pyautogui.press('down')  
-        time.sleep(1)
-        pyautogui.press('down')  
-        time.sleep(1)
-        pyautogui.press('enter') 
+    if (type == 'max'):
+        if (data["statePerformace"] == _minPeformance):
+            # Chọn "View advanced system settings" (Giả sử nó là mục đầu tiên trong danh sách)
+            time.sleep(1)
+            pyautogui.press('enter')
+            time.sleep(1)
+            pyautogui.press('down')  
+            time.sleep(1)
+            pyautogui.press('down')  
+            time.sleep(1)
+            pyautogui.press('enter') 
 
-    saveData(_maxPeformance) 
+            saveData(_maxPeformance) 
+
+    if (type == 'min'):
+        if (data["statePerformace"] == _maxPeformance):
+            # Chọn "View advanced system settings" (Giả sử nó là mục đầu tiên trong danh sách)
+            time.sleep(2)
+            pyautogui.press('enter')
+            time.sleep(1)
+            pyautogui.press('up', presses=2)   
+            time.sleep(1)
+            pyautogui.press('enter')  
+            saveData(_minPeformance)
 
     #close
     time.sleep(3)
     pyautogui.press('tab', presses=4)
     pyautogui.press('enter') 
-
+    
+def maxPeformance(data):
+    configSystemPerformance('max',data)
+    
     print('Done')       
     pyautogui.alert('Done set up maxPeformace')
    
 def normalPeformace(data):
-    # Chờ một chút để đảm bảo mọi thứ đã sẵn sàng
-    time.sleep(2)
-
-    # Bước 1: Mở thanh tìm kiếm Windows (Windows + S)
-    pyautogui.hotkey('win', 's')
-    time.sleep(1)
-
-    # Nhập từ khóa "Advanced"
-    pyautogui.write('View advanced system settings')
-    time.sleep(1)
-    
-    pyautogui.press('enter')
-
-
-    if (data["statePerformace"] == _maxPeformance):
-        # Chọn "View advanced system settings" (Giả sử nó là mục đầu tiên trong danh sách)
-        time.sleep(2)
-        pyautogui.press('enter')
-        # try:
-        #     while True:
-        #         time.sleep(2)
-        #         pyautogui.press('up')
-        # except KeyboardInterrupt:
-        #     print('\n')
-        time.sleep(1)
-        pyautogui.press('up', presses=2)   
-        time.sleep(1)
-        pyautogui.press('enter')  
-    
-    saveData(_minPeformance)
-   
-    #close
-    time.sleep(3)
-    pyautogui.press('tab', presses=4)
-    pyautogui.press('enter') 
+    configSystemPerformance('min', data)
 
     print('Done')   
     pyautogui.alert('Done set up normalPeformace')
