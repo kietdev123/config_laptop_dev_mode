@@ -1,0 +1,4 @@
+open cmd admin: win + x + a 
+
+cd c:/Users/Kiet/Desktop/kiet/my_project/config_laptop_dev_mode
+python main.py
