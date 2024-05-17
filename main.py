@@ -145,24 +145,28 @@ def configPowerPerformance(type, data):
 
     time.sleep(1)
     pyautogui.click(123, 418, 1)
+    time.sleep(3)
+    pyautogui.moveTo(1146, 137, 0)
     time.sleep(1)
-    pyautogui.click(1146, 135, 1)
+    pyautogui.click()
+
+    # pyautogui.press('tab', presses=5)  
+    # time.sleep(1)
+    # pyautogui.press('enter')  
 
     time.sleep(1)
     pyautogui.press('right')
-    time.sleep(1)
     pyautogui.press('tab')
-    time.sleep(1)
     pyautogui.press('down')
 
     if (type == 'max'):
         if (data["statePerformace"] == _minPeformance):
-            time.sleep(1)
+            time.sleep(2)
             pyautogui.press('down')
            
     if (type == 'min'):
         if (data["statePerformace"] == _maxPeformance):
-            time.sleep(1)
+            time.sleep(2)
             pyautogui.press('up')
 
 def maxPeformance(data):
@@ -192,11 +196,31 @@ def getMouseLocation():
     except KeyboardInterrupt:
         print('\n')
 
+def show_menu(data):
+    print("Welcome to config console Python application")
+    print("=> Current config performance " + data["statePerformace"])
+    print("1. Config max performance")
+    print("2. Config min performance")
+    print("3. Get mouse position")
+    print("4. Exit")
+
 def main():
     oldData = readData()
-    # getMouseLocation()
-    #  delete_unused_data()
-    # maxPeformance(oldData)
-    normalPeformace(oldData)
 
+    # delete_unused_data()
+
+    show_menu(oldData)
+    choice = input("Input number (1,2,3,4): ")
+        
+    if choice == '1':
+        maxPeformance(oldData)
+    elif choice == '2':
+        normalPeformace(oldData)
+    elif choice == '3':
+        getMouseLocation()
+    elif choice == '4':
+        print("Exit, bye")
+    else:
+        print("Try again")
+        
 main()
