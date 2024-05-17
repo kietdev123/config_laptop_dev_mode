@@ -1,4 +1,4 @@
-#config_laptop_dev_mode 
+# config_laptop_dev_mode 
 that automates the manual steps for configuring a laptop for development mode, you can create a Python script that performs these tasks.
 
 document
@@ -16,3 +16,6 @@ Run code with cmd_admin
   cd c:/Users/Kiet/Desktop/kiet/my_project/config_laptop_dev_mode
   
   python main.py
+
+Note:
+Must change mouse-location in code with real number in your personal laptop 
