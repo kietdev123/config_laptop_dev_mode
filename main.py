@@ -112,8 +112,7 @@ def configSystemPerformance(type, data):
             pyautogui.press('down')  
             time.sleep(1)
             pyautogui.press('enter') 
-
-            saveData(_maxPeformance) 
+           
 
     if (type == 'min'):
         if (data["statePerformace"] == _maxPeformance):
@@ -124,21 +123,60 @@ def configSystemPerformance(type, data):
             pyautogui.press('up', presses=2)   
             time.sleep(1)
             pyautogui.press('enter')  
-            saveData(_minPeformance)
+            
 
     #close
     time.sleep(3)
     pyautogui.press('tab', presses=4)
     pyautogui.press('enter') 
-    
+
+def configPowerPerformance(type, data):
+    # Chờ một chút để đảm bảo mọi thứ đã sẵn sàng
+    time.sleep(2)
+
+    # Bước 1: Mở thanh tìm kiếm Windows (Windows + S)
+    pyautogui.hotkey('win', 'i')
+    time.sleep(1)
+
+    time.sleep(1)
+    pyautogui.press('tab')
+    time.sleep(1)
+    pyautogui.press('enter')
+
+    time.sleep(1)
+    pyautogui.click(123, 418, 1)
+    time.sleep(1)
+    pyautogui.click(1146, 135, 1)
+
+    time.sleep(1)
+    pyautogui.press('right')
+    time.sleep(1)
+    pyautogui.press('tab')
+    time.sleep(1)
+    pyautogui.press('down')
+
+    if (type == 'max'):
+        if (data["statePerformace"] == _minPeformance):
+            time.sleep(1)
+            pyautogui.press('down')
+           
+    if (type == 'min'):
+        if (data["statePerformace"] == _maxPeformance):
+            time.sleep(1)
+            pyautogui.press('up')
+
 def maxPeformance(data):
     configSystemPerformance('max',data)
-    
+    configPowerPerformance('max', data)
+    saveData(_maxPeformance) 
+
     print('Done')       
     pyautogui.alert('Done set up maxPeformace')
    
 def normalPeformace(data):
     configSystemPerformance('min', data)
+    configPowerPerformance('min', data)
+    saveData(_minPeformance)
 
     print('Done')   
     pyautogui.alert('Done set up normalPeformace')
@@ -156,7 +194,7 @@ def getMouseLocation():
 
 def main():
     oldData = readData()
-    #  getMouseLocation()
+    # getMouseLocation()
     #  delete_unused_data()
     # maxPeformance(oldData)
     normalPeformace(oldData)
